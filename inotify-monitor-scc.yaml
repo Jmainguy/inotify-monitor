@@ -1,0 +1,20 @@
+---
+kind: SecurityContextConstraints
+apiVersion: v1
+metadata:
+  name: scc-inotify-monitor
+allowPrivilegedContainer: true
+runAsUser:
+  type: RunAsAny
+seLinuxContext:
+  type: RunAsAny
+fsGroup:
+  type: RunAsAny
+supplementalGroups:
+  type: RunAsAny
+users:
+- system:serviceaccount:inotify-monitor:inotify-monitor
+allowHostDirVolumePlugin: true
+allowHostPID: true
+allowedCapabilities:
+- '*'

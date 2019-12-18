@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: inotify-monitor
+  namespace: inotify-monitor
+  labels:
+    k8s-app: inotify-monitor
+spec:
+  selector:
+    matchLabels:
+      name: inotify-monitor
+  template:
+    metadata:
+      labels:
+        name: inotify-monitor
+    spec:
+      serviceAccount: inotify-monitor
+      containers:
+      - name: inotify-monitor
+        image: hub.soh.re/jmainguy/inotify-monitor
+        securityContext:
+          privileged: true
+        resources:
+          limits:
+            memory: 100Mi
+            cpu: 100m
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        volumeMounts:
+        - name: proc
+          mountPath: /opt/proc
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: proc
+        hostPath:
+          path: /proc
