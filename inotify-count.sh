@@ -19,9 +19,9 @@ while true; do
     done
 
     if [ $count -gt 50000 ]; then
-    	echo "{\"msg\": \"inotify is too damn high\", \"inotify-count\": \"$count\"}"
+    	echo "{\"msg\": \"inotify is too damn high\", \"inotify-count\": $count}"
     else
-    	echo "{\"msg\": \"inotify is fine\", \"inotify-count\": \"$count\"}"
+    	echo "{\"msg\": \"inotify is fine\", \"inotify-count\": $count}"
     fi
     sleep 300
 done
